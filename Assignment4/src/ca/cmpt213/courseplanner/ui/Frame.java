@@ -20,6 +20,7 @@ public class Frame {
 
     public Frame(Model model){
         courseListFilterPanel = new CourseListFilter(model);
+        courseListPanel = new CourseList(model);
         frame = new JFrame("FAS Course Planner");
         frame.setLayout(new BorderLayout());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
