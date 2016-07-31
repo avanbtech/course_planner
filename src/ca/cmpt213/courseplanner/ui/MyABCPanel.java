@@ -9,17 +9,22 @@ import javax.swing.border.BevelBorder;
  * Created by faranakpouya on 2016-07-23.
  */
 public abstract class MyABCPanel extends JPanel{
-    Model model;
+    private Model model;
+    private JPanel userContentsPanel;
 
     public MyABCPanel(Model model, String title){
         this.model = model;
         this.setLayout(new BorderLayout());
-        JPanel myPanel = new JPanel();
-        myPanel.setBorder(BorderFactory.createBevelBorder(
+        userContentsPanel = new JPanel();
+        userContentsPanel.setBorder(BorderFactory.createBevelBorder(
                 BevelBorder.LOWERED,
                 Color.black, Color.gray));
-        this.add(myPanel, BorderLayout.CENTER);
+        this.add(userContentsPanel, BorderLayout.CENTER);
         displayTitlePanel(title);
+    }
+
+    protected JPanel getUserContentsPanel(){
+        return userContentsPanel;
     }
 
     protected Model getModel(){
