@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import java.util.Arrays;
 import java.util.Set;
 
 /**
@@ -20,40 +21,58 @@ public class CourseListFilter extends MyABCPanel {
     JComboBox departmentList;
     JCheckBox undergrad;
     JCheckBox grad;
+    JLabel departmentLabel;
 
-    public CourseListFilter(Model model) {
+    public CourseListFilter(Model model, int width) {
         super(model, title);
         userContentsPanel = getUserContentsPanel();
         userContentsPanel.setLayout(new BoxLayout(userContentsPanel, BoxLayout.PAGE_AXIS));
         addDepartment();
-        addUnderGradCheckBoxs();
-        addGradCheckBox();
+        addCheckBoxes();
         addUpdateButton();
+        userContentsPanel.setPreferredSize(new Dimension(width, userContentsPanel.getPreferredSize().height));
+        this.setPreferredSize(this.getPreferredSize());
     }
 
     public void addDepartment(){
         JPanel topPanel = new JPanel();
         topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.LINE_AXIS));
-        topPanel.add(new Label("Department"));
+        departmentLabel = new JLabel("Department");
+        topPanel.add(departmentLabel);
         departmentList = new JComboBox();
         Set<String> departments = getModel().getDepartments();
-        for(String aDepartment : departments){
+        String[] departmentsName = departments.toArray(new String[departments.size()]);
+        Arrays.sort(departmentsName);
+        for(String aDepartment : departmentsName){
             departmentList.addItem(aDepartment);
         }
+        Dimension comboSize = departmentList.getPreferredSize();
+        // need to be fixed
+        comboSize.width += 140;
+        departmentList.setMaximumSize(comboSize);
         topPanel.add(departmentList);
         userContentsPanel.add(topPanel);
     }
 
-    public void addUnderGradCheckBoxs(){
-        undergrad = new JCheckBox("Include undergrad courses");
-        undergrad.setAlignmentX(JCheckBox.LEFT);
-        userContentsPanel.add(undergrad);
+    public void addCheckBoxes(){
+        JPanel checkBoxesPanel = new JPanel();
+        checkBoxesPanel.setLayout(new GridLayout(2, 1));
+        checkBoxesPanel.setAlignmentY(JComponent.LEFT_ALIGNMENT);
+        addUnderGradCheckBoxs(checkBoxesPanel);
+        addGradCheckBox(checkBoxesPanel);
+        userContentsPanel.add(checkBoxesPanel);
     }
 
-    public void addGradCheckBox(){
+    public void addUnderGradCheckBoxs(JPanel parent){
+        undergrad = new JCheckBox("Include undergrad courses");
+        //undergrad.setAlignmentX(JCheckBox.LEFT);
+        parent.add(undergrad);
+    }
+
+    public void addGradCheckBox(JPanel parent){
         grad = new JCheckBox("Include grad courses");
-        grad.setAlignmentX(JCheckBox.LEFT);
-        userContentsPanel.add(grad);
+        //grad.setAlignmentX(JCheckBox.LEFT);
+        parent.add(grad);
     }
 
     public void addUpdateButton(){
