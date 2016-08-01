@@ -1,5 +1,7 @@
 package ca.cmpt213.courseplanner.model;
 
+import ca.cmpt213.courseplanner.ui.CourseListListener;
+
 import java.util.*;
 
 /**
@@ -14,6 +16,7 @@ public class Model {
     private String catalogNumber;
     private boolean isGradAllowed;
     private boolean isUndergradAllowed;
+    ArrayList<CourseListListener> courseListListeners;
 
 
     public Model(ArrayList<Course> courses){
@@ -21,6 +24,11 @@ public class Model {
         semester = new Semester();
         campusLocation = new CampusLocation();
         this.allCourses = courses;
+        courseListListeners = new ArrayList<>();
+    }
+
+    public String getSubject(){
+        return subject;
     }
 
     //This method is called by CourseListFilter to set subject, isGradAllowed and isUndergradAllowed
@@ -28,6 +36,9 @@ public class Model {
         this.subject = subject;
         this.isGradAllowed = isGradAllowed;
         this.isUndergradAllowed = isUndergradAllowed;
+        for (CourseListListener listener : courseListListeners){
+            listener.updateCourseList();
+        }
     }
 
     //This method is called by CourseList to set catalogNumber
@@ -158,5 +169,9 @@ public class Model {
             }
         }
         return sameCourses.get(0);
+    }
+
+    public void registerCourseListListener(CourseListListener courseListListener){
+        courseListListeners.add(courseListListener);
     }
 }
