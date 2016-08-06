@@ -1,6 +1,8 @@
 package ca.cmpt213.courseplanner.model;
 
 import ca.cmpt213.courseplanner.ui.CourseListListener;
+import ca.cmpt213.courseplanner.ui.SelectedCourseListener;
+import java.io.*;
 
 import java.util.*;
 
@@ -16,7 +18,8 @@ public class Model {
     private String catalogNumber;
     private boolean isGradAllowed;
     private boolean isUndergradAllowed;
-    ArrayList<CourseListListener> courseListListeners;
+    private ArrayList<CourseListListener> courseListListeners;
+    private ArrayList<SelectedCourseListener> selectedCourseListeners;
 
 
     public Model(ArrayList<Course> courses){
@@ -25,10 +28,21 @@ public class Model {
         campusLocation = new CampusLocation();
         this.allCourses = courses;
         courseListListeners = new ArrayList<>();
+        selectedCourseListeners = new ArrayList<>();
+        Collections.sort(courses);
+        // sorting code data
+        for(Course aCourse : courses){
+            Collections.sort(aCourse.getComponentCodeCollection().getComponentsData());
+        }
+
     }
 
     public String getSubject(){
         return subject;
+    }
+
+    public String getCatalogNumber(){
+        return catalogNumber;
     }
 
     //This method is called by CourseListFilter to set subject, isGradAllowed and isUndergradAllowed
@@ -44,6 +58,9 @@ public class Model {
     //This method is called by CourseList to set catalogNumber
     public void setCatalogNumber(String catalogNumber){
         this.catalogNumber = catalogNumber;
+        for (SelectedCourseListener listener : selectedCourseListeners){
+            listener.courseSelected();
+        }
     }
 
     //This method is called by CourseOfferedBySemester to set semester and campus location
@@ -79,6 +96,16 @@ public class Model {
             }
         }
         return catalogNumbersInSpecificDepartment;
+    }
+
+    public ArrayList<Course> getAllSectionsOfSpecificCourse(){
+        ArrayList<Course> allSections = new ArrayList<>();
+        for (Course aCourse : allCourses){
+            if (aCourse.getSubject().equals(subject) && aCourse.getCatalogNumber().equals(catalogNumber)){
+                allSections.add(aCourse);
+            }
+        }
+        return allSections;
     }
 
     public ArrayList<Semester> getSemestesrAndYears(){
@@ -159,19 +186,62 @@ public class Model {
                     && aCourse.getSemester().getYear() == semester.getYear()
                     && aCourse.getCampusLocation().getLocation() == campusLocation.getLocation()){
                     sameCourses.add(aCourse);
-                // Since the only difference between added courses is instructor name, instructors are combined and the second course
-                // is removed from the list
-                if (sameCourses.size() == 2){
-                    String instructors = sameCourses.get(0).getInstructor() + ", " + sameCourses.get(1).getInstructor();
-                    sameCourses.get(0).setInstructor(instructors);
-                    sameCourses.remove(1);
-                }
+//                Since the only difference between added courses is instructor name, instructors are combined and the second course
+//                is removed from the list
+//                if (sameCourses.size() == 2){
+//                    String instructors = sameCourses.get(0).getInstructor() + ", " + sameCourses.get(1).getInstructor();
+//                    sameCourses.get(0).setInstructor(instructors);
+//                    sameCourses.remove(1);
+//                }
             }
         }
-        return sameCourses.get(0);
+        return sameCourses.get(0);   //Need to be Changed.
     }
 
     public void registerCourseListListener(CourseListListener courseListListener){
         courseListListeners.add(courseListListener);
+    }
+
+    public void registerSelectedCourseListeners(SelectedCourseListener selectedCourseListener){
+        selectedCourseListeners.add(selectedCourseListener);
+    }
+
+    public void dumpModel(){
+        Course course = allCourses.get(0);
+        String subject = "";
+        String catalogNumber = "";
+        String semester = "";
+        String campusLocation = "";
+        System.out.println(course.getSubject() + " " + course.getCatalogNumber());
+        File targetFile = new File("/Users/faranakpouya/Faranak/SFU/213 Java/Assignments/Assignment4/data/output_dump.txt");
+        try{
+            PrintWriter writer = new PrintWriter(targetFile);
+            for (Course aCourse : allCourses){
+                if (!subject.equals(aCourse.getSubject()) || !catalogNumber.equals(aCourse.getCatalogNumber())) {
+                    // course subject or catalog number has changed, need to show title
+                    writer.println("\n" + aCourse.getSubject() + " " + aCourse.getCatalogNumber());
+                    subject = aCourse.getSubject();
+                    catalogNumber = aCourse.getCatalogNumber();
+                }
+                if (!semester.equals(aCourse.getSemester().getOriginalCode()) || !campusLocation.equals(aCourse.getCampusLocation().toString())) {
+                    // course semester or campusLocation has changed, need to show the course
+                    String originalCode = aCourse.getSemester().getOriginalCode();
+                    writer.println("\t" + originalCode + " in " + aCourse.getCampusLocation() + " by " + aCourse.getInstructor());
+                    semester = aCourse.getSemester().getOriginalCode();
+                    campusLocation = aCourse.getCampusLocation().toString();
+                }
+                ArrayList<ComponentCode> codes = aCourse.getComponentCodeCollection().getComponentsData();
+                for(ComponentCode aComponentCode : codes){
+                    writer.println("\t\t" + "Type " + aComponentCode.toString() +
+                            ", Enrollment = " + aComponentCode.getEnrolmentTotal() + "/" +
+                            aComponentCode.getEnrolmentCapacity());
+                }
+
+            }
+            writer.close();
+        }
+        catch (FileNotFoundException e){
+            e.printStackTrace();
+        }
     }
 }

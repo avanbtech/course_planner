@@ -15,6 +15,7 @@ public class Semester {
     private final int START_YEAR = 2000;
     private int year;
     private SemesterData semester;
+    String originalCode;
 
 
     public Semester(){
@@ -24,10 +25,15 @@ public class Semester {
     public Semester(String str){
         readFromString(str);
         year = convertToYear(str);
+        originalCode = str;
     }
 
     public int getYear(){
         return year;
+    }
+
+    public String getOriginalCode(){
+        return originalCode;
     }
 
     public SemesterData getSemesterData(){
@@ -35,7 +41,7 @@ public class Semester {
     }
 
     private int convertToYear(String str){
-        String yearPart = str.substring(1, 2);
+        String yearPart = str.substring(1, 3);
         int number = Integer.parseInt(yearPart);
         year = number + START_YEAR;
         return year;
