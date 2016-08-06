@@ -23,22 +23,37 @@ public class CourseList extends MyABCPanel {
     public CourseList(Model model, int width){
         super(model, title);
         userContentsPanel = getUserContentsPanel();
-        userContentsPanel.setLayout(new BoxLayout(userContentsPanel, BoxLayout.PAGE_AXIS));
-//        Set<String> catalogNumbers = getModel().getCatalogNumbersInSpecificDepartment();
+        userContentsPanel.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.BOTH;
+        c.weighty = 1;
+        c.weightx = 1;
+        c.gridx = 0;
+        c.gridwidth = 1;
+        makeList(width);
+        JScrollPane listScroller = new JScrollPane(courseList);
+        userContentsPanel.add(listScroller, c);
+        model.registerCourseListListener(makeCourseListener());
+    }
+
+    private void makeList(int width){
         listModel = new DefaultListModel();
-        courseList = new JList(listModel);
+        // overriding getPreferredScrollableViewportSize method to set width of JList object
+        courseList = new JList(listModel) {
+            @Override
+            public Dimension getPreferredScrollableViewportSize() {
+                Dimension size = super.getPreferredScrollableViewportSize();
+                size.width = width;
+                return size;
+            }
+        };
         ListSelectionModel listSelectionModel;
         listSelectionModel = courseList.getSelectionModel();
         listSelectionModel.addListSelectionListener(e -> updateCatalogNumber(e));
         courseList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         courseList.setLayoutOrientation(JList.HORIZONTAL_WRAP);
         courseList.setVisibleRowCount(-1);
-        courseList.setPreferredSize(new Dimension(width, 50));
-        courseList.setFixedCellWidth(width / 2 - 2);
-        JScrollPane listScroller = new JScrollPane(courseList);
-        listScroller.setPreferredSize(new Dimension(250, 80));
-        userContentsPanel.add(listScroller);
-        model.registerCourseListListener(makeCourseListener());
+        courseList.setFixedCellWidth(width / 2 - 20);
     }
 
     public void updateCatalogNumber(ListSelectionEvent e){

@@ -108,17 +108,23 @@ public class CourseOfferingBySemester extends MyABCPanel{
         String semester = makeSemesterInString(x);
         ArrayList<Course> coursesInSpecificYearAndSemester = coursesInSpecificYearAndSemester(firstYear + y - 1, semester);
         JPanel cellPanel = new JPanel();
-        cellPanel.setLayout(new BoxLayout(cellPanel, BoxLayout.PAGE_AXIS));
+        cellPanel.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.weighty = 1;
+        c.weightx = 1;
+        c.gridx = 1;
+        c.anchor = GridBagConstraints.NORTHEAST;
+        c.ipady = 0;
         cellPanel.setBorder(BorderFactory.createLineBorder(Color.black));
         for (Course aCourse : coursesInSpecificYearAndSemester){
-            cellPanel.add(makeButton(aCourse));
+            cellPanel.add(makeButton(aCourse), c);
         }
         return cellPanel;
     }
 
     private JButton makeButton(Course course){
         JButton cellButton = new JButton(makeTitleOfButton(course));
-        cellButton.setPreferredSize(new Dimension(INTERNAL_SPACING_X, 10));
         cellButton.addActionListener(e -> {
             //updateYearAndSemester();
         });

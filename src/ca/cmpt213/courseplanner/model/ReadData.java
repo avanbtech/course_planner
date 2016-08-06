@@ -16,7 +16,7 @@ public class ReadData {
         courses = new ArrayList<Course>();
     }
     public ArrayList<Course> readAllLinesOfFile(){
-        File sourceFile = new File("/Users/faranakpouya/Faranak/SFU/213 Java/Assignments/Assignment4/data/course_data_2016.csv");
+        File sourceFile = new File("./data/course_data_2016.csv");
         try{
             Scanner scanner = new Scanner(sourceFile);
             scanner.nextLine();     //To skip first line, which is header.

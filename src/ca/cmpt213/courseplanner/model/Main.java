@@ -12,7 +12,7 @@ public class Main {
         ReadData data = new ReadData();
         ArrayList<Course> courses = data.readAllLinesOfFile();
         Model model = new Model(courses);
-        model.dumpModel();
+        //model.dumpModel();
         Frame frame = new Frame(model);
         //frame.designFrame();
         //ArrayList<String> departments = model.getDepartments();
