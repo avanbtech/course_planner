@@ -56,7 +56,7 @@ public class Frame extends JFrame{
         add(addLeftPanels(), BorderLayout.WEST);
         add(addRightPanel(), BorderLayout.EAST);
         add(addCentralPanel(), BorderLayout.CENTER);
-
+        this.setPreferredSize(new Dimension(1200, 900));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
         setVisible(true);

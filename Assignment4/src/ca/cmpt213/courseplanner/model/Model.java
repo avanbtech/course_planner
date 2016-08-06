@@ -213,7 +213,7 @@ public class Model {
         String semester = "";
         String campusLocation = "";
         System.out.println(course.getSubject() + " " + course.getCatalogNumber());
-        File targetFile = new File("/Users/faranakpouya/Faranak/SFU/213 Java/Assignments/Assignment4/data/output_dump.txt");
+        File targetFile = new File("./data/output_dump.txt");
         try{
             PrintWriter writer = new PrintWriter(targetFile);
             for (Course aCourse : allCourses){
