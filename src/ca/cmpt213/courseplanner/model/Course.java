@@ -1,19 +1,19 @@
 package ca.cmpt213.courseplanner.model;
 
-import sun.tools.tree.ShiftRightExpression;
+import java.util.ArrayList;
 
 /**
  * Created by faranakpouya on 2016-07-23.
  */
-public class Course {
+public class Course implements Comparable<Course>{
     private Semester semester;
     private String subject;
     private String catalogNumber;
     private CampusLocation campusLocation;
     private int enrolmentCapacity;
     private int enrolmentTotal;
-    private String instructor;
-    private String componentCode;
+    private ArrayList<String> instructors;
+    private ComponentCodeCollection componentCodeCollection;
     private EducationLevel educationLevel;
 
     public Course(){
@@ -22,22 +22,19 @@ public class Course {
         campusLocation = new CampusLocation();
         subject = "";
         catalogNumber = "";
-        enrolmentCapacity = 0;
-        enrolmentTotal = 0;
-        instructor = "";
-        componentCode = "";
+        instructors = new ArrayList<>();
+        componentCodeCollection = new ComponentCodeCollection();
     }
 
     public Course(Semester semester, String subject, String catalogNumber, CampusLocation campusLocation,
                   int enrolmentCapacity, int enrolmentTotal, String instructor, String componentCode, EducationLevel educationLevel){
+        instructors = new ArrayList<>();
         this.semester = semester;
         this.subject = subject;
         this.catalogNumber = catalogNumber;
         this.campusLocation = campusLocation;
-        this.enrolmentCapacity = enrolmentCapacity;
-        this.enrolmentTotal = enrolmentTotal;
-        this.instructor = instructor;
-        this.componentCode = componentCode;
+        addInstructor(instructor);
+        this.componentCodeCollection = new ComponentCodeCollection(componentCode, enrolmentTotal, enrolmentCapacity);
         this.educationLevel = educationLevel;
     }
 
@@ -74,16 +71,21 @@ public class Course {
     }
 
     public String getInstructor(){
-        return instructor;
+        String instructorName = "";
+        int index = 0;
+        for (String aInstructor : instructors){
+            if(index > 0){
+                instructorName += ", ";
+            }
+            instructorName += aInstructor;
+            index++;
+        }
+        return instructorName;
     }
 
-    public String getComponentCode(){
-        return componentCode;
+    public ComponentCodeCollection getComponentCodeCollection(){
+        return componentCodeCollection;
     }
-
-
-
-
 
     public void setSemester(Semester semester){
         this.semester = semester;
@@ -113,11 +115,39 @@ public class Course {
         this.enrolmentTotal = enrolmentTotal;
     }
 
-    public void setInstructor(String instructor){
-        this.instructor = instructor;
+    public void addInstructor(String instructor){
+        if(instructor.length() == 0){
+            return;
+        }
+        for(String aInstructor : instructors){
+            if(aInstructor.equals(instructor)){
+                return;
+            }
+        }
+        instructors.add(instructor);
     }
 
-    public void setComponentCode(String componentCode){
-        this.componentCode = componentCode;
+    public int compareTo(Course other){
+        int i = this.subject.compareTo(other.subject);
+        if (i != 0){
+            return i;
+        }
+
+        i = this.catalogNumber.compareTo(other.catalogNumber);
+        if (i != 0){
+            return i;
+        }
+
+        i = this.semester.getOriginalCode().compareTo(other.semester.getOriginalCode());
+        if (i != 0){
+            return i;
+        }
+
+        return i = this.campusLocation.toString().compareTo(other.campusLocation.toString());
     }
+
+    public void addCapacity(String componentCode, int enrolmentTotal, int enrolmentCapacity){
+        this.componentCodeCollection.addCapacity(componentCode, enrolmentTotal, enrolmentCapacity);
+    }
+
 }

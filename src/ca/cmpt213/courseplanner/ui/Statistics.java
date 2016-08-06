@@ -21,5 +21,15 @@ public class Statistics extends MyABCPanel {
         //setPreferredSize(new Dimension(width, 50));
         //userContentsPanel.setPreferredSize(new Dimension(width, userContentsPanel.getPreferredSize().height));
         userContentsPanel.setPreferredSize(new Dimension(width, 200));
+        model.registerSelectedCourseListeners(makeSelectdCourseListener());
+    }
+
+    private SelectedCourseListener makeSelectdCourseListener(){
+        return new SelectedCourseListener() {
+            @Override
+            public void courseSelected() {
+
+            }
+        };
     }
 }
