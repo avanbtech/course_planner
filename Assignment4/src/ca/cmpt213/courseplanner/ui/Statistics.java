@@ -28,8 +28,12 @@ public class Statistics extends MyABCPanel {
         return new SelectedCourseListener() {
             @Override
             public void courseSelected() {
-
+                updateBarGraphs();
             }
         };
+    }
+
+    private void updateBarGraphs(){
+
     }
 }
