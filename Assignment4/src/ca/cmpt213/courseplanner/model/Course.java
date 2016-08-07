@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 /**
  * Created by faranakpouya on 2016-07-23.
+ * Course class has all required fields to describe a course.
  */
 public class Course implements Comparable<Course>{
     private Semester semester;
@@ -13,16 +14,6 @@ public class Course implements Comparable<Course>{
     private ArrayList<String> instructors;
     private ComponentCodeCollection componentCodeCollection;
     private EducationLevel educationLevel;
-
-    public Course(){
-        semester = new Semester();
-        educationLevel = new EducationLevel();
-        campusLocation = new CampusLocation();
-        subject = "";
-        catalogNumber = "";
-        instructors = new ArrayList<>();
-        componentCodeCollection = new ComponentCodeCollection();
-    }
 
     public Course(Semester semester, String subject, String catalogNumber, CampusLocation campusLocation,
                   int enrolmentCapacity, int enrolmentTotal, String instructor, String componentCode, EducationLevel educationLevel){
@@ -40,10 +31,6 @@ public class Course implements Comparable<Course>{
         return semester;
     }
 
-//    public int getYear(){
-//        return this.convertToYear(getSemester().toString());
-//    }
-
     public EducationLevel getEducationLevel(){
         return educationLevel;
     }
@@ -60,6 +47,7 @@ public class Course implements Comparable<Course>{
         return catalogNumber;
     }
 
+    // this method returns list of all instructures for this course
     public String getInstructor(){
         String instructorName = "";
         int index = 0;
@@ -77,26 +65,7 @@ public class Course implements Comparable<Course>{
         return componentCodeCollection;
     }
 
-    public void setSemester(Semester semester){
-        this.semester = semester;
-    }
-
-    public void setSubject(String subject){
-        this.subject = subject;
-    }
-
-    public void setEducationLevel(EducationLevel educationLevel){
-        this.educationLevel = educationLevel;
-    }
-
-    public void setCampusLocation(CampusLocation campusLocation){
-        this.campusLocation = campusLocation;
-    }
-
-    public void setCatalogNumber(String catalogNumber){
-        this.catalogNumber = catalogNumber;
-    }
-
+    // this method adds an instructor if it is not empty and if it has not been added to the list
     public void addInstructor(String instructor){
         if(instructor.length() == 0){
             return;
@@ -109,6 +78,7 @@ public class Course implements Comparable<Course>{
         instructors.add(instructor);
     }
 
+    // courses are compared based on following sequence: subject, catalog number, course type, campus location
     public int compareTo(Course other){
         int i = this.subject.compareTo(other.subject);
         if (i != 0){
@@ -125,7 +95,7 @@ public class Course implements Comparable<Course>{
             return i;
         }
 
-        return i = this.campusLocation.toString().compareTo(other.campusLocation.toString());
+        return this.campusLocation.toString().compareTo(other.campusLocation.toString());
     }
 
     public void addCapacity(String componentCode, int enrolmentTotal, int enrolmentCapacity){

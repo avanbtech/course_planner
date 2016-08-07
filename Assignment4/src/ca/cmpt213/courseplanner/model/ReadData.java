@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 /**
  * Created by faranakpouya on 2016-07-24.
+ * ReadData class reads data file and puts all courses into an array
  */
 public class ReadData {
 
@@ -32,7 +33,7 @@ public class ReadData {
                 int enrolmentTotal = Integer.parseInt(courseInfo[5]);
                 EducationLevel educationLevel = new EducationLevel(courseInfo[2]);
                 String instructor = courseInfo[6];
-                if(instructor.equals("(null)")){
+                if(instructor.equals("(null)")){        // converting null to empty for instructor
                     instructor = "";
                 }
                 Course course = new Course(semester, courseInfo[1], courseInfo[2], campusLocation, enrolmentCapacity,
@@ -46,10 +47,10 @@ public class ReadData {
         }
 
         removeDuplicateCourses();
-
         return courses;
     }
 
+    // this method combines all courses that have the same subject, catalog number, semester, year, and campus location
     private void removeDuplicateCourses(){
         Collections.sort(courses);
         int i = 0;

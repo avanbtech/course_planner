@@ -6,6 +6,7 @@ import java.util.Collection;
 
 /**
  * Created by faranakpouya on 2016-07-23.
+ * ComponentCode class holds type of course (LEC, TUT, etc.) and its enrolment capacity and enrolment total
  */
 public class ComponentCode implements Comparable<ComponentCode>{
 
@@ -27,11 +28,13 @@ public class ComponentCode implements Comparable<ComponentCode>{
         return enrolmentTotal;
     }
 
+    // this method increases enrolment capacity and enrolment total of the code
     public void addCapacity(int enrolmentTotal, int enrolmentCapacity){
         this.enrolmentCapacity += enrolmentCapacity;
         this.enrolmentTotal += enrolmentTotal;
     }
 
+    // this code shows if given code is the same as this object
     public boolean isSame(String codeType){
         return this.codeType.equals(codeType.toUpperCase());
     }

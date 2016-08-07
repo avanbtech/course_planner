@@ -37,8 +37,6 @@ public class CourseOfferingBySemester extends MyABCPanel{
         return new SelectedCourseListener() {
             @Override
             public void courseSelected() {
-                ArrayList<Semester> semesters = getModel().getSemestesrAndYears();
-                String selectedCatalogNumber = getModel().getCatalogNumber();
                 allSections = getModel().getAllSectionsOfSpecificCourse();
                 addContent();
             }
