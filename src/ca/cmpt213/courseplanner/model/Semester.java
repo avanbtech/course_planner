@@ -76,12 +76,4 @@ public class Semester {
         }
         return "UNKNOWN";
     }
-
-    public static String[] getAvailableSemesters(){
-        String[] semesters = new String[3];
-        semesters[0] = "Spring";
-        semesters[1] = "Summer";
-        semesters[2] = "Fall";
-        return semesters;
-    }
 }

@@ -9,12 +9,14 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args){
+        new Main();
+    }
+
+    public Main(){
         ReadData data = new ReadData();
         ArrayList<Course> courses = data.readAllLinesOfFile();
         Model model = new Model(courses);
         model.dumpModel();
-        Frame frame = new Frame(model);
-        //frame.designFrame();
-        //ArrayList<String> departments = model.getDepartments();
+        new Frame(model);
     }
 }

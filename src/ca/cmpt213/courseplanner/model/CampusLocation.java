@@ -2,6 +2,7 @@ package ca.cmpt213.courseplanner.model;
 
 /**
  * Created by faranakpouya on 2016-07-23.
+ * CampusLocation class hols campus location of a course
  */
 public class CampusLocation {
 
@@ -26,6 +27,7 @@ public class CampusLocation {
         return campusLocation;
     }
 
+    // this method converts a string to location enum
     private void readFromString(String str){
         campusLocation = Locations.OTHER;
         if(str == null){
@@ -54,14 +56,5 @@ public class CampusLocation {
             return "HRBRCNTR";
         }
         return "OTHER";
-    }
-
-    public static String[] getAvailableLocations(){
-        String[] locations = new String[4];
-        locations[0] = "Bby";
-        locations[1] = "Sry";
-        locations[2] = "Van";
-        locations[3] = "Other";
-        return locations;
     }
 }

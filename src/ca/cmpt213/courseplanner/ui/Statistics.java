@@ -64,7 +64,7 @@ public class Statistics extends MyABCPanel {
         for(int i = 0; i < NUMBER_OF_SEMESTER_BARS; i++){
             semesterData[i] = 0;
         }
-        String[] semesterLabels = Semester.getAvailableSemesters();
+        String[] semesterLabels = getAvailableSemesters();
         semesterOfferingBarGraphModel = new BarGraphModel(semesterData, semesterLabels);
         semesterOfferingBarGraphIcon = new BarGraphIcon(semesterOfferingBarGraphModel, width, BAR_GRAPH_HEIGHT);
         JLabel barPlotLabel = new JLabel(semesterOfferingBarGraphIcon);
@@ -81,7 +81,7 @@ public class Statistics extends MyABCPanel {
         for(int i = 0; i < NUMBER_OF_CAMPUS_BARS; i++){
             campusData[i] = 0;
         }
-        String[] campusLabels = CampusLocation.getAvailableLocations();
+        String[] campusLabels = getAvailableLocations();
         campusOfferingBarGraphModel = new BarGraphModel(campusData, campusLabels);
         campusOfferingBarGraphIcon = new BarGraphIcon(campusOfferingBarGraphModel, width, BAR_GRAPH_HEIGHT);
         JLabel barPlotLabel = new JLabel(campusOfferingBarGraphIcon);
@@ -118,4 +118,21 @@ public class Statistics extends MyABCPanel {
 
         this.updateUI();
     }
+
+    private String[] getAvailableLocations(){
+        String[] locations = new String[4];
+        locations[0] = "Bby";
+        locations[1] = "Sry";
+        locations[2] = "Van";
+        locations[3] = "Other";
+        return locations;
+    }
+    private String[] getAvailableSemesters(){
+        String[] semesters = new String[3];
+        semesters[0] = "Spring";
+        semesters[1] = "Summer";
+        semesters[2] = "Fall";
+        return semesters;
+    }
+
 }
