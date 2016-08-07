@@ -115,22 +115,18 @@ public class CourseOfferingBySemester extends MyABCPanel{
         for (Course aCourse : coursesInSpecificYearAndSemester){
             internalPanel.add(makeButton(aCourse));
         }
-        cellPanel.add(internalPanel, BorderLayout.PAGE_START);
+        cellPanel.add(internalPanel, BorderLayout.NORTH);
         return cellPanel;
     }
 
     private JButton makeButton(Course course){
         JButton cellButton = new JButton(makeTitleOfButton(course));
         cellButton.addActionListener(e -> {
-            //updateYearAndSemester();
+            getModel().setCourse(course);
         });
         return cellButton;
     }
 
-//    private String makeTitleForButton(){
-//        String courseAndLocation;
-//        return courseAndLocation;
-//    }
     private String makeTitleOfButton(Course course){
         String subject = course.getSubject();
         String catalogNumber = course.getCatalogNumber();

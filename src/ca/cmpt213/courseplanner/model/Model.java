@@ -1,5 +1,6 @@
 package ca.cmpt213.courseplanner.model;
 
+import ca.cmpt213.courseplanner.ui.CourseDetailListener;
 import ca.cmpt213.courseplanner.ui.CourseListListener;
 import ca.cmpt213.courseplanner.ui.SelectedCourseListener;
 import java.io.*;
@@ -18,8 +19,11 @@ public class Model {
     private String catalogNumber;
     private boolean isGradAllowed;
     private boolean isUndergradAllowed;
+    private String instructor;
     private ArrayList<CourseListListener> courseListListeners;
     private ArrayList<SelectedCourseListener> selectedCourseListeners;
+    private ArrayList<CourseDetailListener> courseDetailListeners;
+    private Course selectedCourse;
 
 
     public Model(ArrayList<Course> courses){
@@ -29,6 +33,8 @@ public class Model {
         this.allCourses = courses;
         courseListListeners = new ArrayList<>();
         selectedCourseListeners = new ArrayList<>();
+        courseDetailListeners = new ArrayList<>();
+        instructor = "";
         // sorting code data
         for(Course aCourse : courses){
             Collections.sort(aCourse.getComponentCodeCollection().getComponentsData());
@@ -43,6 +49,18 @@ public class Model {
         return catalogNumber;
     }
 
+    public Semester getSemester(){
+        return semester;
+    }
+
+    public CampusLocation getCampusLocation(){
+        return campusLocation;
+    }
+
+    public String getInstructor(){
+        return instructor;
+    }
+
     //This method is called by CourseListFilter to set subject, isGradAllowed and isUndergradAllowed
     public void setCourseListFilterData(String subject, boolean isGradAllowed, boolean isUndergradAllowed){
         if(this.subject.equals(subject) && this.isGradAllowed == isGradAllowed && this.isUndergradAllowed == isUndergradAllowed){
@@ -54,6 +72,7 @@ public class Model {
         catalogNumber = null;
         callCourseListListeners();
         callSelectedCourseListeners();
+       // callCourseDetailsListener();
     }
 
     private void callCourseListListeners(){
@@ -64,7 +83,7 @@ public class Model {
 
     //This method is called by CourseList to set catalogNumber
     public void setCatalogNumber(String catalogNumber){
-        if(this.catalogNumber.equals(catalogNumber)){
+        if(this.catalogNumber != null && this.catalogNumber.equals(catalogNumber)){
             return;
         }
         this.catalogNumber = catalogNumber;
@@ -77,10 +96,19 @@ public class Model {
         }
     }
 
-    //This method is called by CourseOfferedBySemester to set semester and campus location
-    public void setSemesterAndLocation(Semester semester, CampusLocation campusLocation){
-        this.semester = semester;
-        this.campusLocation = campusLocation;
+    private void callCourseDetailsListener(){
+        for (CourseDetailListener listener : courseDetailListeners){
+            listener.updateDetailsOfCourse();
+        }
+    }
+
+    public void setCourse(Course course){
+        this.selectedCourse = course;
+        callCourseDetailsListener();
+    }
+
+    public Course getCourse(){
+        return selectedCourse;
     }
 
     //This method is called by CourseListFilter
@@ -211,6 +239,10 @@ public class Model {
 
     public void registerSelectedCourseListeners(SelectedCourseListener selectedCourseListener){
         selectedCourseListeners.add(selectedCourseListener);
+    }
+
+    public void registerCourseDetailsListener(CourseDetailListener courseDetailListener){
+        courseDetailListeners.add(courseDetailListener);
     }
 
     public void dumpModel(){
