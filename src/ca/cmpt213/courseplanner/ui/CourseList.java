@@ -33,6 +33,7 @@ public class CourseList extends MyABCPanel {
         makeList(width);
         JScrollPane listScroller = new JScrollPane(courseList);
         userContentsPanel.add(listScroller, c);
+        this.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 0));
         model.registerCourseListListener(makeCourseListener());
     }
 
@@ -76,7 +77,7 @@ public class CourseList extends MyABCPanel {
     }
 
     private CourseListListener makeCourseListener(){
-        return new CourseListListener() {
+        CourseListListener listener = new CourseListListener() {
             @Override
             public void updateCourseList() {
                 Set<String> catalogNumbers = getModel().getCatalogNumbersInSpecificDepartment();
@@ -91,5 +92,6 @@ public class CourseList extends MyABCPanel {
                 }
             }
         };
+        return listener;
     }
 }

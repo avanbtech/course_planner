@@ -1,8 +1,10 @@
 package ca.cmpt213.courseplanner.model;
 
+import javax.swing.text.html.HTMLDocument;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.io.File;
+import java.util.Collections;
 import java.util.Scanner;
 
 /**
@@ -35,22 +37,7 @@ public class ReadData {
                 }
                 Course course = new Course(semester, courseInfo[1], courseInfo[2], campusLocation, enrolmentCapacity,
                         enrolmentTotal, instructor, courseInfo[7], educationLevel);
-                boolean isSameCourse = false;
-
-                for (Course aCourse : courses){
-                    if (aCourse.getSubject().equals(course.getSubject()) && aCourse.getCatalogNumber().equals(course.getCatalogNumber())
-                            && aCourse.getSemester().getSemesterData() == semester.getSemesterData()
-                            && aCourse.getSemester().getYear() == semester.getYear()
-                            && aCourse.getCampusLocation().getLocation() == campusLocation.getLocation()){
-                        aCourse.addInstructor(course.getInstructor());
-                        aCourse.addCapacity(courseInfo[7], enrolmentTotal, enrolmentCapacity);
-                        isSameCourse = true;
-                        break;
-                    }
-                }
-                if (!isSameCourse){
-                    courses.add(course);
-                }
+                courses.add(course);
             }
             scanner.close();
         }
@@ -58,6 +45,38 @@ public class ReadData {
             e.printStackTrace();
         }
 
+        removeDuplicateCourses();
+
         return courses;
+    }
+
+    private void removeDuplicateCourses(){
+        Collections.sort(courses);
+        int i = 0;
+        int maxIndex = courses.size();
+        while(i < maxIndex - 1){
+            int j = i + 1;
+            Course aCourse = courses.get(i);
+            while(j < maxIndex){
+                Course course = courses.get(j);
+                if(aCourse.getSubject().equals(course.getSubject()) && aCourse.getCatalogNumber().equals(course.getCatalogNumber())
+                        && aCourse.getSemester().getSemesterData() == course.getSemester().getSemesterData()
+                        && aCourse.getSemester().getYear() == course.getSemester().getYear()
+                        && aCourse.getCampusLocation().getLocation() == course.getCampusLocation().getLocation())
+                {
+                    aCourse.addInstructor(course.getInstructor());
+                    ComponentCodeCollection componentCodes = course.getComponentCodeCollection();
+                    if(componentCodes.size() != 0){
+                        ComponentCode code = componentCodes.getComponentsData().get(0);
+                        aCourse.addCapacity(code.toString(), code.getEnrolmentTotal(), code.getEnrolmentCapacity());
+                    }
+                    courses.remove(j);
+                    maxIndex = courses.size();
+                    continue;
+                }
+                break;
+            }
+            i = j;
+        }
     }
 }

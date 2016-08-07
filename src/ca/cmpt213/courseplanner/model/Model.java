@@ -29,12 +29,10 @@ public class Model {
         this.allCourses = courses;
         courseListListeners = new ArrayList<>();
         selectedCourseListeners = new ArrayList<>();
-        Collections.sort(courses);
         // sorting code data
         for(Course aCourse : courses){
             Collections.sort(aCourse.getComponentCodeCollection().getComponentsData());
         }
-
     }
 
     public String getSubject(){
@@ -47,9 +45,18 @@ public class Model {
 
     //This method is called by CourseListFilter to set subject, isGradAllowed and isUndergradAllowed
     public void setCourseListFilterData(String subject, boolean isGradAllowed, boolean isUndergradAllowed){
+        if(this.subject.equals(subject) && this.isGradAllowed == isGradAllowed && this.isUndergradAllowed == isUndergradAllowed){
+            return;
+        }
         this.subject = subject;
         this.isGradAllowed = isGradAllowed;
         this.isUndergradAllowed = isUndergradAllowed;
+        catalogNumber = null;
+        callCourseListListeners();
+        callSelectedCourseListeners();
+    }
+
+    private void callCourseListListeners(){
         for (CourseListListener listener : courseListListeners){
             listener.updateCourseList();
         }
@@ -57,7 +64,14 @@ public class Model {
 
     //This method is called by CourseList to set catalogNumber
     public void setCatalogNumber(String catalogNumber){
+        if(this.catalogNumber.equals(catalogNumber)){
+            return;
+        }
         this.catalogNumber = catalogNumber;
+        callSelectedCourseListeners();
+    }
+
+    private void callSelectedCourseListeners(){
         for (SelectedCourseListener listener : selectedCourseListeners){
             listener.courseSelected();
         }
@@ -79,9 +93,6 @@ public class Model {
         return departments;
     }
 
-    //If 2 session is offer in same location we should display once with all instructors
-
-
     // this method is called by CourseList to get all courses from specified department with certain criteria
     public Set<String> getCatalogNumbersInSpecificDepartment(){
         Set<String>catalogNumbersInSpecificDepartment = new HashSet<>();
@@ -99,6 +110,9 @@ public class Model {
     }
 
     public ArrayList<Course> getAllSectionsOfSpecificCourse(){
+        if(catalogNumber == null){
+            return new ArrayList<>();
+        }
         ArrayList<Course> allSections = new ArrayList<>();
         for (Course aCourse : allCourses){
             if (aCourse.getSubject().equals(subject) && aCourse.getCatalogNumber().equals(catalogNumber)){
@@ -186,13 +200,6 @@ public class Model {
                     && aCourse.getSemester().getYear() == semester.getYear()
                     && aCourse.getCampusLocation().getLocation() == campusLocation.getLocation()){
                     sameCourses.add(aCourse);
-//                Since the only difference between added courses is instructor name, instructors are combined and the second course
-//                is removed from the list
-//                if (sameCourses.size() == 2){
-//                    String instructors = sameCourses.get(0).getInstructor() + ", " + sameCourses.get(1).getInstructor();
-//                    sameCourses.get(0).setInstructor(instructors);
-//                    sameCourses.remove(1);
-//                }
             }
         }
         return sameCourses.get(0);   //Need to be Changed.
@@ -212,7 +219,6 @@ public class Model {
         String catalogNumber = "";
         String semester = "";
         String campusLocation = "";
-        System.out.println(course.getSubject() + " " + course.getCatalogNumber());
         File targetFile = new File("./data/output_dump.txt");
         try{
             PrintWriter writer = new PrintWriter(targetFile);

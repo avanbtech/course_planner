@@ -31,6 +31,7 @@ public class CourseListFilter extends MyABCPanel {
         addCheckBoxes();
         addUpdateButton();
         userContentsPanel.setPreferredSize(new Dimension(width, userContentsPanel.getPreferredSize().height));
+        this.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 0));
         this.setPreferredSize(this.getPreferredSize());
     }
 

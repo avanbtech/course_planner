@@ -30,6 +30,7 @@ public class CourseOfferingBySemester extends MyABCPanel{
         model.registerSelectedCourseListeners(makeSelectdCourseListener());
         allSections = getModel().getAllSectionsOfSpecificCourse();
         addContent();
+        this.setBorder(BorderFactory.createEmptyBorder(0, 4, 0, 4));
     }
 
     private SelectedCourseListener makeSelectdCourseListener(){
@@ -49,6 +50,7 @@ public class CourseOfferingBySemester extends MyABCPanel{
         if(allSections.size() == 0){
             JLabel centerLabel = new JLabel("Use a filter to select a course.");
             userContentsPanel.add(centerLabel);
+            userContentsPanel.updateUI();
             return;
         }
         int numberOfYears = getNumberOfYears();
@@ -72,8 +74,7 @@ public class CourseOfferingBySemester extends MyABCPanel{
                 }
             }
         }
-        userContentsPanel.revalidate();
-        userContentsPanel.repaint();
+        userContentsPanel.updateUI();
     }
 
     private GridBagConstraints makeContains(int x, int y){
@@ -108,18 +109,13 @@ public class CourseOfferingBySemester extends MyABCPanel{
         String semester = makeSemesterInString(x);
         ArrayList<Course> coursesInSpecificYearAndSemester = coursesInSpecificYearAndSemester(firstYear + y - 1, semester);
         JPanel cellPanel = new JPanel();
-        cellPanel.setLayout(new GridBagLayout());
-        GridBagConstraints c = new GridBagConstraints();
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.weighty = 1;
-        c.weightx = 1;
-        c.gridx = 1;
-        c.anchor = GridBagConstraints.NORTHEAST;
-        c.ipady = 0;
         cellPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+        cellPanel.setLayout(new BorderLayout());
+        JPanel internalPanel = new JPanel(new GridLayout(0,1,0,0));
         for (Course aCourse : coursesInSpecificYearAndSemester){
-            cellPanel.add(makeButton(aCourse), c);
+            internalPanel.add(makeButton(aCourse));
         }
+        cellPanel.add(internalPanel, BorderLayout.PAGE_START);
         return cellPanel;
     }
 

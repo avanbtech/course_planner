@@ -30,4 +30,8 @@ public class ComponentCodeCollection {
     public ArrayList<ComponentCode> getComponentsData(){
         return componentsData;
     }
+
+    public int size(){
+        return componentsData.size();
+    }
 }
