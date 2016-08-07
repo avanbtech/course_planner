@@ -12,6 +12,7 @@ public class Frame extends JFrame{
 
     private Model model;
     private int LEFT_RIGHT_PANELS_WIDTH = 250;
+    private int STATISTICS_PANEL_HEIGHT = 400;
 //    private CourseListFilter courseListFilterPanel;
 //    private CourseList courseListPanel;
 //    private CourseOfferingBySemester courseOfferingBySemesterPanel;

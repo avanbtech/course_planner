@@ -5,7 +5,7 @@ package ca.cmpt213.courseplanner.model;
  */
 public class Semester {
 
-    enum SemesterData{
+    public enum SemesterData{
         SPRING,
         FALL,
         SUMMER,
@@ -75,5 +75,13 @@ public class Semester {
             return "SUMMER";
         }
         return "UNKNOWN";
+    }
+
+    public static String[] getAvailableSemesters(){
+        String[] semesters = new String[3];
+        semesters[0] = "Spring";
+        semesters[1] = "Summer";
+        semesters[2] = "Fall";
+        return semesters;
     }
 }

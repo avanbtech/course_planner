@@ -10,8 +10,6 @@ public class Course implements Comparable<Course>{
     private String subject;
     private String catalogNumber;
     private CampusLocation campusLocation;
-    private int enrolmentCapacity;
-    private int enrolmentTotal;
     private ArrayList<String> instructors;
     private ComponentCodeCollection componentCodeCollection;
     private EducationLevel educationLevel;
@@ -62,14 +60,6 @@ public class Course implements Comparable<Course>{
         return catalogNumber;
     }
 
-    public int getEnrolmentCapacity(){
-        return enrolmentCapacity;
-    }
-
-    public int getEnrolmentTotal(){
-        return enrolmentTotal;
-    }
-
     public String getInstructor(){
         String instructorName = "";
         int index = 0;
@@ -105,14 +95,6 @@ public class Course implements Comparable<Course>{
 
     public void setCatalogNumber(String catalogNumber){
         this.catalogNumber = catalogNumber;
-    }
-
-    public void setEnrolmentCapacity(int enrolmentCapacity){
-        this.enrolmentCapacity = enrolmentCapacity;
-    }
-
-    public void setEnrolmentTotal(int enrolmentTotal){
-        this.enrolmentTotal = enrolmentTotal;
     }
 
     public void addInstructor(String instructor){

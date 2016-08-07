@@ -5,7 +5,7 @@ package ca.cmpt213.courseplanner.model;
  */
 public class CampusLocation {
 
-    enum Locations{
+    public enum Locations{
         SURREY,
         BURNABY,
         HRBRCNTR,
@@ -54,5 +54,14 @@ public class CampusLocation {
             return "HRBRCNTR";
         }
         return "OTHER";
+    }
+
+    public static String[] getAvailableLocations(){
+        String[] locations = new String[4];
+        locations[0] = "Bby";
+        locations[1] = "Sry";
+        locations[2] = "Van";
+        locations[3] = "Other";
+        return locations;
     }
 }
