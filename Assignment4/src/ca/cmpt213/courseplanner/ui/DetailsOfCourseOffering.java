@@ -25,6 +25,7 @@ public class DetailsOfCourseOffering extends MyABCPanel{
         userContentsPanel.setLayout(gridLayout);
         setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5));
         userContentsPanel.add(makeTopSection(width));
+        model.registerCourseDetailsListener(makeCourseDetailsListener());
     }
 
     private JPanel makeTopSection(int width){
@@ -41,7 +42,7 @@ public class DetailsOfCourseOffering extends MyABCPanel{
         internalPanel.add(new JLabel("Instructors:"));
         internalPanel.add(makeInstructorsField());
         internalPanel.setPreferredSize(new Dimension(width, internalPanel.getPreferredSize().height));
-        topSectionPanel.add(internalPanel, BorderLayout.PAGE_START);
+        topSectionPanel.add(internalPanel, BorderLayout.NORTH);
         return topSectionPanel;
     }
 
@@ -81,5 +82,19 @@ public class DetailsOfCourseOffering extends MyABCPanel{
         panel.setBackground(Color.WHITE);
         panel.setOpaque(true);
         return panel;
+    }
+
+    public CourseDetailListener makeCourseDetailsListener(){
+        return new CourseDetailListener() {
+            @Override
+            public void updateDetailsOfCourse() {
+                Course course = getModel().getCourse();
+                String courseName = course.getSubject() + " " + course.getCatalogNumber();
+                courseNameLabel.setText(courseName);
+                semesterLabel.setText(course.getSemester().getOriginalCode());
+                locationLabel.setText(course.getCampusLocation().toString());
+                instructorsField.setText(course.getInstructor());
+            }
+        };
     }
 }

@@ -17,7 +17,7 @@ import ca.cmpt213.bargraph.BarGraphIcon;
 public class Statistics extends MyABCPanel {
     private static final int NUMBER_OF_SEMESTER_BARS = 3;
     private static final int NUMBER_OF_CAMPUS_BARS = 4;
-    private static final int BAR_GRAPH_HEIGHT = 300;
+    private static final int BAR_GRAPH_HEIGHT = 200;
     static String title = "Statistic";
     JPanel userContentsPanel;
     BarGraphIcon semesterOfferingBarGraphIcon;
