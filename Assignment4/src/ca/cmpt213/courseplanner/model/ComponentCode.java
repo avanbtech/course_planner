@@ -5,7 +5,7 @@ import com.sun.org.apache.bcel.internal.classfile.Code;
 import java.util.Collection;
 
 /**
- * Created by faranakpouya on 2016-07-23.
+ * Created by Faranak Nobakhtian on 2016-07-23.
  * ComponentCode class holds type of course (LEC, TUT, etc.) and its enrolment capacity and enrolment total
  */
 public class ComponentCode implements Comparable<ComponentCode>{

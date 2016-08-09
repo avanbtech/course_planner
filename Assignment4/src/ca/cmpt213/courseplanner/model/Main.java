@@ -1,20 +1,33 @@
 package ca.cmpt213.courseplanner.model;
 import ca.cmpt213.courseplanner.ui.*;
 
+import javax.swing.*;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.io.File;
 
 /**
- * Created by faranakpouya on 2016-07-24.
+ * Created by Faranak Nobakhtian on 2016-07-24.
  */
 public class Main {
+
+    private static String filePath = "./data/course_data_2016.csv";
 
     public static void main(String[] args){
         new Main();
     }
 
     public Main(){
-        ReadData data = new ReadData();
-        ArrayList<Course> courses = data.readAllLinesOfFile();
+        File file = new File(filePath);
+        ArrayList<Course> courses;
+        try{
+            ReadData data = new ReadData();
+            courses = data.readAllLinesOfFile(file);
+        }
+        catch (FileNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "Data file (" + file.getAbsolutePath() + ") not found.");
+            return;
+        }
         Model model = new Model(courses);
         model.dumpModel();
         new Frame(model);

@@ -12,7 +12,8 @@ import java.util.Map;
 import ca.cmpt213.bargraph.BarGraphIcon;
 
 /**
- * Created by faranakpouya on 2016-07-26.
+ * Created by Faranak Nobakhtian on 2016-08-01.
+ * This class displays statistics for the selected course
  */
 public class Statistics extends MyABCPanel {
     private static final int NUMBER_OF_SEMESTER_BARS = 3;

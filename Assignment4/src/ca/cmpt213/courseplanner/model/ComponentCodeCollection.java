@@ -3,7 +3,7 @@ package ca.cmpt213.courseplanner.model;
 import java.util.*;
 
 /**
- * Created by faranakpouya on 2016-08-05.
+ * Created by Faranak Nobakhtian on 2016-08-05.
  * ComponentCodeCollection class holds a collection of ComponentCode objects
  */
 public class ComponentCodeCollection {

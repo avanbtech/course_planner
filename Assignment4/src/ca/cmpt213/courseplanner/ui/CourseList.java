@@ -1,17 +1,16 @@
 package ca.cmpt213.courseplanner.ui;
 
 import ca.cmpt213.courseplanner.model.*;
-import javafx.scene.control.ComboBox;
 import java.util.Arrays;
-
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import java.util.Set;
 import java.awt.*;
 
 /**
- * Created by faranakpouya on 2016-07-26.
+ * Created by Faranak Nobakhtian on 2016-08-01.
+ * This class displays course list panel to show list of courses for the selected department
+ * It notifies Model when user changes a course
  */
 public class CourseList extends MyABCPanel {
     static String title = "Course List";

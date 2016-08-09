@@ -1,7 +1,9 @@
 package ca.cmpt213.courseplanner.model;
 
 /**
- * Created by faranakpouya on 2016-07-23.
+ * Created by Faranak Nobakhtian on 2016-07-23.
+ * Semester class holds information about term and year of a course.
+ * This class also converts a string to term and year.
  */
 public class Semester {
 

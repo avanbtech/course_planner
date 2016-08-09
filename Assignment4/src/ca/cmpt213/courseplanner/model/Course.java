@@ -3,7 +3,7 @@ package ca.cmpt213.courseplanner.model;
 import java.util.ArrayList;
 
 /**
- * Created by faranakpouya on 2016-07-23.
+ * Created by Faranak Nobakhtian on 2016-07-23.
  * Course class has all required fields to describe a course.
  */
 public class Course implements Comparable<Course>{
@@ -16,13 +16,13 @@ public class Course implements Comparable<Course>{
     private EducationLevel educationLevel;
 
     public Course(Semester semester, String subject, String catalogNumber, CampusLocation campusLocation,
-                  int enrolmentCapacity, int enrolmentTotal, String instructor, String componentCode, EducationLevel educationLevel){
-        instructors = new ArrayList<>();
+                  int enrolmentCapacity, int enrolmentTotal, String[] instructors, String componentCode, EducationLevel educationLevel){
+        this.instructors = new ArrayList<>();
         this.semester = semester;
         this.subject = subject;
         this.catalogNumber = catalogNumber;
         this.campusLocation = campusLocation;
-        addInstructor(instructor);
+        addInstructors(instructors);
         this.componentCodeCollection = new ComponentCodeCollection(componentCode, enrolmentTotal, enrolmentCapacity);
         this.educationLevel = educationLevel;
     }
@@ -48,7 +48,7 @@ public class Course implements Comparable<Course>{
     }
 
     // this method returns list of all instructures for this course
-    public String getInstructor(){
+    public String getInstructorText(){
         String instructorName = "";
         int index = 0;
         for (String aInstructor : instructors){
@@ -61,21 +61,33 @@ public class Course implements Comparable<Course>{
         return instructorName;
     }
 
+    public ArrayList<String> getInstructors(){
+        return instructors;
+    }
+
     public ComponentCodeCollection getComponentCodeCollection(){
         return componentCodeCollection;
     }
 
     // this method adds an instructor if it is not empty and if it has not been added to the list
-    public void addInstructor(String instructor){
-        if(instructor.length() == 0){
-            return;
-        }
+    public void addInstructors(String[] instructors){
         for(String aInstructor : instructors){
-            if(aInstructor.equals(instructor)){
-                return;
+            aInstructor = aInstructor.trim();       // removing spaces
+            if(aInstructor.length() == 0){
+                continue;
+            }
+            boolean found = false;
+            // see if instructor is already added
+            for(String aInstructor2 : this.instructors){
+                if(aInstructor2.equals(aInstructor)){
+                    found = true;
+                    break;
+                }
+            }
+            if(!found){     // add instructor if it is not in the list
+                this.instructors.add(aInstructor);
             }
         }
-        instructors.add(instructor);
     }
 
     // courses are compared based on following sequence: subject, catalog number, course type, campus location
