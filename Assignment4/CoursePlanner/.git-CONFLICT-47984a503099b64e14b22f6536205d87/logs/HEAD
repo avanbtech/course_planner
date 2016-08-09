@@ -1,0 +1,4 @@
+0000000000000000000000000000000000000000 ebdda95069492794c34b5ba009381719daf8c590 frnb <frnknb@gmailcom> 1469661002 -0700	checkout: moving from second_version to master
+ebdda95069492794c34b5ba009381719daf8c590 ebdda95069492794c34b5ba009381719daf8c590 frnb <frnknb@gmailcom> 1469661063 -0700	checkout: moving from master to newVersion
+0000000000000000000000000000000000000000 eca4ef7bf645aab67b840f8c66979a9d2aa23fb8 frnb <frnknb@gmailcom> 1469661133 -0700	commit (initial): Assignment 4
+eca4ef7bf645aab67b840f8c66979a9d2aa23fb8 ebdda95069492794c34b5ba009381719daf8c590 frnb <frnknb@gmailcom> 1469661169 -0700	checkout: moving from newVersion to head

@@ -8,7 +8,8 @@ import java.util.Set;
 import java.awt.*;
 
 /**
- * Created by Faranak Nobakhtian on 2016-08-01.
+ * @author Faranak Nobakhtian
+ * @version  2016-08-01.
  * This class displays course list panel to show list of courses for the selected department
  * It notifies Model when user changes a course
  */

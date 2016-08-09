@@ -7,7 +7,8 @@ import java.io.*;
 import java.util.*;
 
 /**
- * Created by Faranak Nobakhtian on 2016-07-25.
+ * @author  Faranak Nobakhtian
+ * @version  2016-07-25.
  * Model class implements the main logic of the program.
  * This class holds all changes made by user, for example, changing subject, catalog number, or course
  * Also, Model class informs observers of all changes happening in other UI panels
@@ -65,18 +66,6 @@ public class Model {
 
     public String getCatalogNumber(){
         return catalogNumber;
-    }
-
-    public Semester getSemester(){
-        return semester;
-    }
-
-    public CampusLocation getCampusLocation(){
-        return campusLocation;
-    }
-
-    public String getInstructor(){
-        return instructor;
     }
 
     //This method is called by CourseListFilter to set subject, isGradAllowed and isUndergradAllowed
@@ -242,26 +231,6 @@ public class Model {
 
     public void registerCourseDetailsListener(CourseDetailListener courseDetailListener){
         courseDetailListeners.add(courseDetailListener);
-    }
-    public void deregisterCourseListListener(CourseListListener courseListListener){
-        int index = 0;
-        for(CourseListListener aCourseListListener : courseListListeners){
-
-            if(courseListListener == aCourseListListener){
-                courseListListeners.remove(index);
-            }
-            index++;
-        }
-    }
-
-    public void deregisterSelectedCourseListeners(SelectedCourseListener selectedCourseListener){
-        int index = 0;
-        for(SelectedCourseListener aSelectedCourseListener : selectedCourseListeners){
-            if(selectedCourseListener == aSelectedCourseListener){
-                selectedCourseListeners.remove(index);
-            }
-            index++;
-        }
     }
 
     // this method writes all courses data to output file

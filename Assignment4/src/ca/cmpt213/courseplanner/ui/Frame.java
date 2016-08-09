@@ -6,7 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Created by Faranak Nobakhtian on 2016-08-01.
+ * @author  Faranak Nobakhtian
+ * @version  2016-08-01.
  * This class is the main GUI frame and it calls each panel to make itself
  */
 public class Frame extends JFrame{

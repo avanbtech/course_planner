@@ -7,7 +7,8 @@ import java.util.ArrayList;
 import java.io.File;
 
 /**
- * Created by Faranak Nobakhtian on 2016-07-24.
+ * @author  Faranak Nobakhtian
+ * @version  2016-07-24.
  */
 public class Main {
 

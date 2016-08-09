@@ -7,7 +7,8 @@ import java.util.Collections;
 import java.util.Scanner;
 
 /**
- * Created by Faranak Nobakhtian on 2016-07-24.
+ * @author  Faranak Nobakhtian
+ * @version  2016-07-24.
  * ReadData class reads data file and puts all courses into an array
  */
 public class ReadData {
@@ -15,7 +16,7 @@ public class ReadData {
     ArrayList<Course> courses;
 
     public ReadData(){
-        courses = new ArrayList<Course>();
+        courses = new ArrayList<>();
     }
     public ArrayList<Course> readAllLinesOfFile(File sourceFile) throws FileNotFoundException{
         Scanner scanner = new Scanner(sourceFile);

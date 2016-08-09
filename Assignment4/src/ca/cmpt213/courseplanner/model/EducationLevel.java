@@ -1,7 +1,8 @@
 package ca.cmpt213.courseplanner.model;
 
 /**
- * Created by Faranak Nobakhtian on 2016-07-23.
+ * @author  Faranak Nobakhtian
+ * @version  2016-07-23.
  * EducationLevel class holds educational level of a course (undergraduate or graduate)
  */
 public class EducationLevel {

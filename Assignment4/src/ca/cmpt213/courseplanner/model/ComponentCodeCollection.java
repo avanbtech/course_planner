@@ -3,7 +3,8 @@ package ca.cmpt213.courseplanner.model;
 import java.util.*;
 
 /**
- * Created by Faranak Nobakhtian on 2016-08-05.
+ * @author  Faranak Nobakhtian
+ * @version  2016-08-05.
  * ComponentCodeCollection class holds a collection of ComponentCode objects
  */
 public class ComponentCodeCollection {
@@ -12,10 +13,6 @@ public class ComponentCodeCollection {
     public ComponentCodeCollection(String str, int enrolmentTotal, int capacity){
         componentsData = new ArrayList<>();
         componentsData.add(new ComponentCode(str, enrolmentTotal, capacity));
-    }
-
-    public ComponentCodeCollection(){
-        componentsData = new ArrayList<>();
     }
 
     // this method adds a componentCode if it does not already exist in the collection.
