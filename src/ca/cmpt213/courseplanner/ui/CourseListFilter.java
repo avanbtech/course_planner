@@ -7,7 +7,8 @@ import java.util.Arrays;
 import java.util.Set;
 
 /**
- * Created by Faranak Nobakhtian on 2016-08-01.
+ * @author  Faranak Nobakhtian
+ * @version  2016-08-01.
  * This class displays subject list panel to show list of departments
  * It notifies Model when user changes a department
  */

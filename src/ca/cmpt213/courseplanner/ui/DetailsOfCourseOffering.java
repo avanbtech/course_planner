@@ -7,7 +7,8 @@ import java.awt.*;
 import java.util.ArrayList;
 
 /**
- * Created by Faranak Nobakhtian on 2016-08-01.
+ * @author  Faranak Nobakhtian
+ * @version  2016-08-01.
  * This class displays details of a selected course offering
  */
 public class DetailsOfCourseOffering extends MyABCPanel{

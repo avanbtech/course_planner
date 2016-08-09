@@ -6,7 +6,8 @@ import java.awt.*;
 import javax.swing.border.BevelBorder;
 
 /**
- * Created by Faranak Nobakhtian on 2016-08-01.
+ * @author  Faranak Nobakhtian
+ * @version  2016-08-01.
  * This class is parent of all panels and it displays panel title and a border around contents
  */
 

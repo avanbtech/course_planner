@@ -3,7 +3,8 @@ package ca.cmpt213.courseplanner.model;
 import java.util.ArrayList;
 
 /**
- * Created by Faranak Nobakhtian on 2016-07-23.
+ * @author  Faranak Nobakhtian
+ * @version      2016-07-23.
  * Course class has all required fields to describe a course.
  */
 public class Course implements Comparable<Course>{
