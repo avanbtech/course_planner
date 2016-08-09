@@ -7,7 +7,8 @@ import java.awt.*;
 import java.util.ArrayList;
 
 /**
- * Created by faranakpouya on 2016-07-26.
+ * Created by Faranak Nobakhtian on 2016-08-01.
+ * This class displays details of a selected course offering
  */
 public class DetailsOfCourseOffering extends MyABCPanel{
     static String title = "Details of Course Offering";
@@ -24,7 +25,6 @@ public class DetailsOfCourseOffering extends MyABCPanel{
         userContentsPanel.setLayout(new BoxLayout(userContentsPanel, BoxLayout.PAGE_AXIS));
         setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5));
         userContentsPanel.add(makeTopSection(width));
-        userContentsPanel.add(makeCourseCodePanel());
         model.registerCourseDetailsListener(makeCourseDetailsListener());
     }
 
@@ -123,7 +123,7 @@ public class DetailsOfCourseOffering extends MyABCPanel{
                     courseNameLabel.setText(courseName);
                     semesterLabel.setText(course.getSemester().getOriginalCode());
                     locationLabel.setText(course.getCampusLocation().toString());
-                    instructorsField.setText(course.getInstructor());
+                    instructorsField.setText(course.getInstructorText());
                     addCourseTypeData(course);
                 }
                 else{

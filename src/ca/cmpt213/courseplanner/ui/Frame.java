@@ -6,49 +6,13 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Created by faranakpouya on 2016-07-26.
+ * Created by Faranak Nobakhtian on 2016-08-01.
+ * This class is the main GUI frame and it calls each panel to make itself
  */
 public class Frame extends JFrame{
 
     private Model model;
     private int LEFT_RIGHT_PANELS_WIDTH = 250;
-    private int STATISTICS_PANEL_HEIGHT = 400;
-//    private CourseListFilter courseListFilterPanel;
-//    private CourseList courseListPanel;
-//    private CourseOfferingBySemester courseOfferingBySemesterPanel;
-//    private Statistics statisticsPanel;
-//    private DetailsOfCourseOffering detailsOfCourseOfferingPanel;
-/*
-    public Frame(Model model){
-//        courseListPanel = new CourseList(model);
-        super("FAS Course Planner");
-        this.model = model;
-        setLayout(new GridBagLayout());
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        designFrame();
-        pack();
-        setVisible(true);
-    }
-
-    public void designFrame(){
-        addCourseListFilterPanel();
-        addCourseListPanel();
-    }
-
-    public void addCourseListFilterPanel(){
-        CourseListFilter courseListFilterPanel = new CourseListFilter(model);
-        GridBagConstraints c = makeConstraints(0, 0);
-        add(courseListFilterPanel, c);
-    }
-
-    public void addCourseListPanel(){
-        CourseList courseListPanel = new CourseList(model);
-        GridBagConstraints c = makeConstraints(0, 1);
-        add(courseListPanel, c);
-    }
-
-
-*/
 
     public Frame(Model model){
         super("FAS Course Planner");
@@ -77,9 +41,6 @@ public class Frame extends JFrame{
         rightPanel.setLayout(new BorderLayout());
         rightPanel.add(addStatisticPanel(), BorderLayout.NORTH);
         rightPanel.add(addDetailsOfCourseOfferingPanel(), BorderLayout.WEST);
-        //rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.PAGE_AXIS));
-        //rightPanel.add(addStatisticPanel());
-        //rightPanel.add(addDetailsOfCourseOfferingPanel());
         return rightPanel;
     }
 

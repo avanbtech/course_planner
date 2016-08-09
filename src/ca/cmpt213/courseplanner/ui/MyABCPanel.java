@@ -6,8 +6,10 @@ import java.awt.*;
 import javax.swing.border.BevelBorder;
 
 /**
- * Created by faranakpouya on 2016-07-23.
+ * Created by Faranak Nobakhtian on 2016-08-01.
+ * This class is parent of all panels and it displays panel title and a border around contents
  */
+
 public abstract class MyABCPanel extends JPanel{
     private Model model;
     private JPanel userContentsPanel;

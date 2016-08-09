@@ -4,12 +4,10 @@ import ca.cmpt213.courseplanner.ui.CourseDetailListener;
 import ca.cmpt213.courseplanner.ui.CourseListListener;
 import ca.cmpt213.courseplanner.ui.SelectedCourseListener;
 import java.io.*;
-
-import java.lang.reflect.Array;
 import java.util.*;
 
 /**
- * Created by faranakpouya on 2016-07-25.
+ * Created by Faranak Nobakhtian on 2016-07-25.
  * Model class implements the main logic of the program.
  * This class holds all changes made by user, for example, changing subject, catalog number, or course
  * Also, Model class informs observers of all changes happening in other UI panels
@@ -287,7 +285,7 @@ public class Model {
                     if (!semester.equals(aCourse.getSemester().getOriginalCode()) || !campusLocation.equals(aCourse.getCampusLocation().toString())) {
                         // course semester or campusLocation has changed, need to show the course
                         String originalCode = aCourse.getSemester().getOriginalCode();
-                        writer.println("\t" + originalCode + " in " + aCourse.getCampusLocation() + " by " + aCourse.getInstructor());
+                        writer.println("\t" + originalCode + " in " + aCourse.getCampusLocation() + " by " + aCourse.getInstructorText());
                         semester = aCourse.getSemester().getOriginalCode();
                         campusLocation = aCourse.getCampusLocation().toString();
                     }

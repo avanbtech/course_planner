@@ -1,14 +1,14 @@
 package ca.cmpt213.courseplanner.ui;
 
 import ca.cmpt213.courseplanner.model.*;
-
 import java.util.ArrayList;
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
 import java.awt.*;
 
 /**
- * Created by faranakpouya on 2016-07-26.
+ * Created by Faranak Nobakhtian on 2016-08-01.
+ * This class displays list of offerings for selected course
+ * It notifies Model when user clicks on one of offerings
  */
 public class CourseOfferingBySemester extends MyABCPanel{
 

@@ -1,7 +1,7 @@
 package ca.cmpt213.courseplanner.model;
 
 /**
- * Created by faranakpouya on 2016-07-23.
+ * Created by Faranak Nobakhtian on 2016-07-23.
  * EducationLevel class holds educational level of a course (undergraduate or graduate)
  */
 public class EducationLevel {
@@ -15,18 +15,17 @@ public class EducationLevel {
     // this method reads educational level of a course from a string
     // a course is an undergraduate course unless its starting number is larger than 4
     private void readFromString(String str){
-        isUndergrad = true;
-        if(str == null || str.length() == 0){
-            return;
+        int courseNumber = getStringValue(str);
+        if(courseNumber >= 500){
+            isUndergrad = false;
         }
-        try{
-            if(Integer.parseInt(Character.toString(str.charAt(0))) > 4){
-                isUndergrad = false;
-            }
-        }
-        catch (Exception e){
+        else{
             isUndergrad = true;
         }
+    }
+
+    private int getStringValue(String str) {
+        return Integer.valueOf("0" + str.replaceAll("(\\d*).*", "$1"));
     }
 
     @Override

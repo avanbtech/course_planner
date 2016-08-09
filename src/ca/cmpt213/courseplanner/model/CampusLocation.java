@@ -1,7 +1,7 @@
 package ca.cmpt213.courseplanner.model;
 
 /**
- * Created by faranakpouya on 2016-07-23.
+ * Created by Faranak Nobakhtian on 2016-07-23.
  * CampusLocation class hols campus location of a course
  */
 public class CampusLocation {

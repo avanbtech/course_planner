@@ -1,19 +1,15 @@
 package ca.cmpt213.courseplanner.ui;
 
 import ca.cmpt213.courseplanner.model.*;
-import javafx.scene.control.ComboBox;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
 import java.util.Arrays;
 import java.util.Set;
 
 /**
- * Created by faranakpouya on 2016-07-25.
+ * Created by Faranak Nobakhtian on 2016-08-01.
+ * This class displays subject list panel to show list of departments
+ * It notifies Model when user changes a department
  */
 public class CourseListFilter extends MyABCPanel {
     static String title = "Course List Filter";
